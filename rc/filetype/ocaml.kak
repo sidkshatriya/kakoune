@@ -103,10 +103,10 @@ define-command ocaml-alternative-file -docstring 'Switch between .ml and .mli fi
 # Recognize when the user is trying to commence a comment when they type `(*` and
 # then automatically insert `*)` on behalf of the user. A small convenience.
 hook global WinSetOption filetype=ocaml %{
-    hook window InsertChar '\*' %{
+    hook window -group ocaml-comment InsertChar '\*' %{
         try %{
             execute-keys -draft 'HH<a-k>\(\*<ret>'
-            execute-keys '  *)<left><left><left>'
+            execute-keys -draft '<esc>Gla *)'
         }
     }
 }
